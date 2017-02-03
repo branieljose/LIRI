@@ -41,7 +41,27 @@ function doit(command, input) {
 
             });
             break;
-        case '1':
+        case 'movie-this':
+                request.get('http://www.omdbapi.com/?t=' + input + '&y=&plot=short&tomatoes=true&r=json', function(err, res) {
+            if (!err && res.statusCode == 200) {
+                var doc = JSON.parse(res.body);
+                console.log('Title: ' + doc.Title +
+                    '\nYear: ' + doc.Year +
+                    '\nimdbRating: ' + doc.imdbRating +
+                    '\nCountry: ' + doc.Country +
+                    '\nLanguage: ' + doc.Language +
+                    '\nPlot: ' + doc.Plot +
+                    '\nActors: ' + doc.Actors +
+                    '\nRotten Tomatoes: ' + doc.tomatoRotten +
+                    '\nRotten Tomatoes URL: ' + doc.tomatoURL
+                );
+            } else {
+                console.log(err);
+            }
+
+        });
+            break;
+        case 'do-what-it-says':
         fs.readFile('./random.txt', 'UTF8',function(err,data){
             if (err) {
                 console.log(err);
