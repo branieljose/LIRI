@@ -31,8 +31,7 @@ function startInt() {
         if (command === 1) {
             firstCommand();      
         } else if (command === 2) {
-            // secondCommand();
-            spotify();   
+            secondCommand();   
         } else if (command === 3) {
             thirdCommand();
         } else if (command === 4) {
@@ -43,34 +42,7 @@ function startInt() {
 }
 startInt();
 
-//this function contains the switch and cases
-function doIt(command, input) {
-
-    switch (command) {
-        case 'my-tweets':
-
-            break;
-        case 'spotify-this-song':
-
-            break;
-        case 'movie-this':
-            //here I repeat the same steps again
-
-            break;
-        case 'do-what-it-says':
-
-
-
-    }
-    //logs commands into logs.txt
-    var toAppend = ' [' + command + ', ' + input + '] -';
-    fs.appendFile('log.txt', toAppend, (err) => {
-        if (err) throw err;
-    });
-}
-
 function firstCommand(){
-//my-tweets
 //makes a request to the twitter API 
     var params = {
         screen_name: 'fakatoon_21'
@@ -91,8 +63,6 @@ function firstCommand(){
 }
 
 function secondCommand(){
-//spotify-this-song
-
     inquirer.prompt([{
         type: 'input',
         name: 'songName',
@@ -132,7 +102,6 @@ function secondCommand(){
 }
 
 function thirdCommand(input){
-//weather-this
  inquirer.prompt([{
     type: 'input',
     name: 'zip',
@@ -151,8 +120,6 @@ function thirdCommand(input){
                     //converts temperature from Kalvin to Fahrenheit
                     minTemp = Math.round(9/5 * (doc.main.temp_min - 273) + 32),
                     maxTemp = Math.round(9/5 * (doc.main.temp_max - 273) + 32);
-                
-
                 console.log('Description: ' + doc.weather[0].description  + '\n' + 
                             'Location: '    + doc.name                    + '\n' +
                             "Temperature: "      + 
@@ -170,8 +137,6 @@ function thirdCommand(input){
 }
 
 function fourthCommand(){
-//do-what-it-says
-//reads .txt file 
     fs.readFile('./random.txt', 'UTF8', function(err, data) {
         //logs error, if there is any 
         if (err) {
@@ -182,12 +147,10 @@ function fourthCommand(){
 
         //store each key separately 
         var cmd = file[0];
-        var inpt = file[1];
-        //pass keys as params and runs function 
-        // doIt(cmd, inpt);
     });
 }
 
+//takes user back to main menu
 function goBack(){
      inquirer.prompt([{
         type: 'confirm',
